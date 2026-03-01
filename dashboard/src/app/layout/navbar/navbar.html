@@ -1,0 +1,62 @@
+<nav class="fixed top-4 left-0 w-full z-[100] px-4">
+  <div class="max-w-[1200px] mx-auto bg-white/80 backdrop-blur-md border border-slate-200 rounded-2xl shadow-sm px-6 py-3 flex justify-between items-center relative transition-all">
+    
+    <h1 class="text-lg font-bold tracking-tight text-slate-900 cursor-pointer uppercase">
+      {{ logoText() }}<span class="text-blue-600">.</span>
+    </h1>
+
+    <ul class="hidden lg:flex items-center gap-2 text-sm font-medium relative">
+      <div class="indicator absolute top-1/2 -translate-y-1/2 h-8 rounded-full bg-slate-100 border border-slate-200 transition-all duration-500 ease-out z-0"
+           [style.width.px]="indicatorWidth()"
+           [style.left.px]="indicatorLeft()">
+      </div>
+
+      @for (item of navItems(); track item.label) {
+        <li class="relative z-10" #navItem>
+          <a [routerLink]="item.url" 
+             routerLinkActive="active-link" 
+             [routerLinkActiveOptions]="{exact: item.url === '/'}"
+             (isActiveChange)="$event && updateIndicator(navItem)" 
+             class="px-4 py-2 block text-slate-600 hover:text-slate-900 transition-colors cursor-pointer">
+             {{item.label}}
+          </a>
+        </li>
+      }
+    </ul>
+
+    <div class="flex items-center gap-3">
+      <a [href]="portfolioUrl()" target="_blank" 
+         class="hidden sm:inline-block px-5 py-2 bg-slate-900 text-white text-xs font-semibold rounded-xl hover:bg-slate-800 shadow-md active:scale-95 transition-all">
+          Visit Portfolio
+      </a>
+      
+      <button (click)="toggleMenu()" class="lg:hidden p-2 text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-6 h-6">
+          @if (!isMenuOpen()) {
+            <path d="M4 8h16M4 16h16" stroke-width="2" stroke-linecap="round"/>
+          } @else {
+            <path d="M6 18L18 6M6 6l12 12" stroke-width="2" stroke-linecap="round"/>
+          }
+        </svg>
+      </button>
+    </div>
+
+    @if (isMenuOpen()) {
+      <div class="absolute top-[calc(100%+12px)] left-0 w-full bg-white border border-slate-200 rounded-2xl shadow-xl p-4 lg:hidden flex flex-col gap-2 z-[110] animate-in fade-in slide-in-from-top-2 duration-300">
+        @for (item of navItems(); track item.label) {
+          <a [routerLink]="item.url" 
+             (click)="isMenuOpen.set(false)"
+             routerLinkActive="bg-slate-50 text-blue-600 font-semibold"
+             [routerLinkActiveOptions]="{exact: item.url === '/'}"
+             class="px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors">
+             {{item.label}}
+          </a>
+        }
+        <hr class="border-slate-100 my-1">
+        <a [href]="portfolioUrl()" class="px-4 py-3 bg-slate-900 text-white text-center rounded-xl font-semibold">
+          Visit Portfolio
+        </a>
+      </div>
+    }
+  </div>
+</nav>

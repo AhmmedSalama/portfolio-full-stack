@@ -1,0 +1,63 @@
+<section class="pt-32 pb-12 px-6 bg-[#f8fafc] min-h-screen">
+  <div class="max-w-[900px] mx-auto">
+    <div class="mb-10">
+      <h2 class="text-blue-600 font-black uppercase tracking-widest text-xs">Identity</h2>
+      <p class="text-3xl font-black text-slate-900">About Me Editor</p>
+    </div>
+
+    <div class="bg-white border border-slate-200 rounded-[3rem] p-8 md:p-12 shadow-sm">
+      <form [formGroup]="aboutForm" (ngSubmit)="saveAbout()" class="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div class="flex flex-col items-center space-y-4">
+          <div class="relative group w-48 h-48 rounded-[2.5rem] overflow-hidden border-4 border-slate-50 shadow-xl">
+            @if (imagePreview()) {
+              <img [src]="imagePreview()" class="w-full h-full object-cover">
+            } @else {
+              <div class="w-full h-full bg-slate-100 flex items-center justify-center text-slate-400 font-bold">No Image</div>
+            }
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center cursor-pointer">
+              <span class="text-white text-[10px] font-bold uppercase tracking-widest">Change Photo</span>
+              <input type="file" (change)="onFileSelected($event)" class="absolute inset-0 opacity-0 cursor-pointer">
+            </div>
+          </div>
+          <p class="text-[10px] text-slate-400 font-bold uppercase">Personal Avatar</p>
+        </div>
+
+        <div class="md:col-span-2 space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="space-y-1">
+              <label class="text-[10px] font-black text-slate-400 ml-2 uppercase">Full Name / Title</label>
+              <input formControlName="title" class="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:border-blue-500 font-bold">
+            </div>
+            <div class="space-y-1">
+              <label class="text-[10px] font-black text-slate-400 ml-2 uppercase">Current Job</label>
+              <input formControlName="job" class="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:border-blue-500 font-bold">
+            </div>
+          </div>
+
+          <div class="space-y-1">
+            <label class="text-[10px] font-black text-slate-400 ml-2 uppercase">Job Short Bio</label>
+            <input formControlName="descJob" class="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:border-blue-500 font-semibold">
+          </div>
+
+          <div class="space-y-1">
+            <label class="text-[10px] font-black text-slate-400 ml-2 uppercase">Detailed Biography</label>
+            <textarea formControlName="desc" rows="5" class="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:border-blue-500 font-medium"></textarea>
+          </div>
+
+          <div class="pt-4 flex items-center gap-4">
+            <button type="submit" [disabled]="aboutForm.invalid || isLoading()" 
+                    class="flex-1 py-5 bg-slate-900 text-white font-black rounded-2xl hover:bg-blue-600 disabled:opacity-50 transition-all shadow-xl shadow-blue-100 uppercase tracking-widest text-xs">
+              {{ isLoading() ? 'Saving Changes...' : 'Save Profile Changes' }}
+            </button>
+            
+            @if (isSuccess()) {
+              <span class="text-green-600 font-bold text-sm animate-bounce flex items-center gap-1">
+                <i class="fas fa-check-circle"></i> Saved!
+              </span>
+            }
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

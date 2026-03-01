@@ -1,0 +1,111 @@
+<section class="pt-32 pb-12 px-6 bg-[#f8fafc] min-h-screen relative">
+  <div class="max-w-[1200px] mx-auto">
+    <div class="flex justify-between items-center mb-10">
+      <div>
+        <h2 class="text-blue-600 font-bold uppercase tracking-tighter text-sm">Portfolio Management</h2>
+        <p class="text-3xl font-black text-slate-900">My Projects</p>
+      </div>
+      <button (click)="openModal(null, 'edit')" class="bg-slate-900 text-white px-6 py-3 rounded-2xl font-bold hover:bg-blue-600 transition-all shadow-lg cursor-pointer">
+        + Add New Project
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      @for (p of projects(); track p._id) {
+        <div class="bg-white border border-slate-200 rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group relative">
+          
+          <button (click)="onDeleteProject(p._id!, $event)" 
+                  class="absolute top-4 right-4 z-[60] w-10 h-10 bg-white/90 backdrop-blur-md text-slate-400 hover:text-red-500 hover:bg-white rounded-xl flex items-center justify-center shadow-sm opacity-0 group-hover:opacity-100 transition-all duration-300 border border-slate-100 cursor-pointer">
+            <i class="fa-solid fa-trash-can"></i>
+          </button>
+
+          <div class="h-56 overflow-hidden relative">
+            <img [src]="projectService.imgBaseUrl + p.image" 
+                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            
+            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+              <button (click)="openModal(p, 'view')" class="p-3 bg-white rounded-xl text-slate-900 hover:text-blue-600 shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-all cursor-pointer">
+                <i class="fa-solid fa-eye text-sm"></i>
+              </button>
+              <button (click)="openModal(p, 'edit')" class="p-3 bg-white rounded-xl text-slate-900 hover:text-orange-500 shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-all delay-75 cursor-pointer">
+                <i class="fa-solid fa-pen-to-square text-sm"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-slate-900 mb-2">{{p.title}}</h3>
+            <div class="flex flex-wrap gap-2 mb-4">
+              @for (t of p.techs; track t) {
+                <span class="text-[10px] font-bold px-3 py-1 bg-slate-100 text-slate-600 rounded-lg uppercase">{{t}}</span>
+              }
+            </div>
+            <div class="flex justify-between items-center border-t border-slate-100 pt-4">
+              <div class="flex gap-4">
+                <a [href]="p.githubLink" target="_blank" class="text-[10px] font-black text-slate-400 hover:text-slate-900 transition-colors uppercase tracking-widest">Github</a>
+                <a [href]="p.liveDemo" target="_blank" class="text-[10px] font-black text-blue-600 hover:text-blue-800 transition-colors uppercase tracking-widest">Live Demo</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  @if (isModalOpen()) {
+    <div class="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
+      <div class="bg-white rounded-[2.5rem] w-full max-w-2xl p-8 max-h-[90vh] overflow-y-auto relative shadow-2xl">
+        
+        <button (click)="closeModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-900 cursor-pointer">
+          <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+
+        @if (modalMode() === 'edit') {
+          <h2 class="text-2xl font-black text-slate-900 mb-6 italic">
+            {{ selectedProject() ? 'Edit Project' : 'Add New Project' }}
+          </h2>
+          
+          <form [formGroup]="editForm" (ngSubmit)="saveProject()" class="space-y-4">
+            <input formControlName="title" type="text" placeholder="Project Title" class="w-full p-4 bg-slate-50 rounded-2xl border border-slate-100 focus:ring-2 focus:ring-blue-500 outline-none">
+            
+            <textarea formControlName="description" rows="4" placeholder="Full Description" class="w-full p-4 bg-slate-50 rounded-2xl border border-slate-100 focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
+            
+            <input formControlName="techs" type="text" placeholder="Technologies (e.g. Angular, Node.js)" class="w-full p-4 bg-slate-50 rounded-2xl border border-slate-100 focus:ring-2 focus:ring-blue-500 outline-none">
+            
+            <div class="grid grid-cols-2 gap-4">
+              <input formControlName="githubLink" type="url" placeholder="Github Link" class="w-full p-4 bg-slate-50 rounded-2xl border border-slate-100">
+              <input formControlName="liveDemo" type="url" placeholder="Live Demo Link" class="w-full p-4 bg-slate-50 rounded-2xl border border-slate-100">
+            </div>
+
+            <div class="p-4 border-2 border-dashed border-slate-200 rounded-2xl text-center">
+              <input type="file" (change)="onFileSelected($event)" class="hidden" #fileInput>
+              <button type="button" (click)="fileInput.click()" class="text-blue-600 font-bold hover:underline cursor-pointer">
+                Click to upload project image
+              </button>
+              @if (imagePreview()) {
+                <img [src]="imagePreview()" class="mt-4 h-40 mx-auto rounded-xl object-cover shadow-md">
+              }
+            </div>
+
+            <button type="submit" [disabled]="editForm.invalid" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold hover:bg-blue-700 disabled:bg-slate-200 disabled:text-slate-400 transition-all shadow-lg mt-4 cursor-pointer">
+              {{ selectedProject() ? 'Update Project' : 'Create Project' }}
+            </button>
+          </form>
+        }
+
+        @if (modalMode() === 'view') {
+          <div class="space-y-6">
+            <img [src]="projectService.imgBaseUrl + selectedProject()?.image" class="w-full h-64 object-cover rounded-3xl shadow-sm">
+            <h2 class="text-3xl font-black text-slate-900 tracking-tight">{{ selectedProject()?.title }}</h2>
+            <p class="text-slate-600 leading-relaxed">{{ selectedProject()?.description }}</p>
+            <div class="flex flex-wrap gap-2">
+              @for (t of selectedProject()?.techs; track t) {
+                <span class="px-4 py-1.5 bg-blue-50 text-blue-600 rounded-full font-bold text-xs">{{t}}</span>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</section>

@@ -1,0 +1,19 @@
+:host {
+  display: block;
+  background-color: transparent;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  /* تأثير تدريج خفيف على الأرقام */
+  background: linear-gradient(180deg, #FFFFFF 0%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* تنعيم حواف الكروت في الموبايل */
+@media (max-width: 768px) {
+  .grid {
+    gap: 1rem;
+  }
+}

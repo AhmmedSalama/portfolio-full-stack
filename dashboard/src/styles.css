@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+:root {
+  --bg-body: #f8fafc;        /* Slate 50 - خلفية هادئة */
+  --bg-card: #ffffff;        /* أبيض ناصع للكروت */
+  --border-subtle: #e2e8f0;  /* Slate 200 - حدود ناعمة */
+  --text-main: #0f172a;      /* Slate 900 - نص عميق */
+  --text-muted: #64748b;     /* Slate 500 - نصوص فرعية */
+  --accent: #3b82f6;         /* Blue 500 - للتمييز */
+}
+
+body {
+  background-color: var(--bg-body);
+  color: var(--text-main);
+  font-family: 'Inter', system-ui, sans-serif;
+  margin: 0;
+}
+
+/* ستايل الرابط النشط */
+.active-link {
+  color: var(--accent) !important;
+  background: rgba(59, 130, 246, 0.05);
+  border-radius: 999px;
+}
