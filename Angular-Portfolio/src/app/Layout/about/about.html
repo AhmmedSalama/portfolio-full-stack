@@ -1,0 +1,86 @@
+<section id="0" class="mt-10 mx-auto border rounded-[.9rem] h-fit border-2 [border-color:var(--nav-border)] [background-color:var(--bg-tertiary)] p-2 ">
+  <div class="border[border-color:var(--nav-border)] rounded-[.9rem] [background-color:var(--sec-bg)]">
+    <div class="mainSectionHeader p-4 flex items-center justify-between rounded-t-[.8rem] [background-color:var(--text-muted)] ">
+      <div class="flex items-center justify-start">
+        <span class="bg-[#ff5f56] w-[10px] h-[10px] rounded-full mr-2 shadow-[0_0_5px_#ff5f56]"></span>
+        <span class="bg-[#ffbd2e] w-[10px] h-[10px] rounded-full mr-2 shadow-[0_0_5px_#ffbd2e]"></span>
+        <span class="bg-[#27c93f] w-[10px] h-[10px] rounded-full mr-2 shadow-[0_0_5px_#27c93f]"></span>
+      </div>
+      <h2 class="text-xl lg:text-2xl font-bold tracking-[.2rem] lg:tracking-[.3rem] text-white">
+        {{aboutData?.title}}
+      </h2>
+    </div>
+
+    <div class="overflow-hidden px-[10px] rounded-b-[.8rem] h-[calc(100%-65px)]">
+      <div class="overflow-y-auto overflow-x-hidden h-full block md:flex">
+        <div class="w-full overflow-hidden flex flex-col-reverse md:flex-row items-center justify-between gap-[1em]">
+          
+          <div class=" flex-shrink-0">
+            <img 
+              alt="Frontend Developer" 
+              width="450" 
+              height="450" 
+              decoding="async" 
+              class="rounded-[20px] object-cover"
+              [src]="aboutData?.image ? 'http://localhost:3000/uploads/' + aboutData?.image : 'https://images.unsplash.com/photo-1593642634367-d91a135587b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=450&q=80'"
+            />
+          </div>
+
+          <div class="py-[10px] text-center md:text-left space-y-6 max-w-2xl">
+            <div class="space-y-2">
+              <p class="text-[var(--text-muted)] text-base md:text-lg font-medium tracking-wide animate-fade-in">
+                Hello, I'm
+              </p>
+
+              <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--text-secondary)] leading-tight">
+                <div class="flex flex-col md:flex-row md:items-center md:gap-4 mb-0">
+                  <span class="block">{{aboutData?.desc}}</span>
+                </div>
+
+                <div class="flex flex-wrap gap-1 justify-center md:justify-start mb-4">
+                  <div>
+                    <span class="relative md:top-[-25px] inline-flex items-center gap-2 px-4 py-2 border border-white/30 rounded-full text-[var(--text-secondary)] text-sm font-semibold"
+                          style="background-color: var(--nav-bg); box-shadow: rgba(255, 255, 255, 0.15) 0px 0px 0px 0.1em inset;">
+                      <div class="w-2 h-2 bg-green-600 rounded-full animate-pulse"></div>
+                      Available for Freelance
+                    </span>
+                  </div>
+                  <div>
+                    <span class="relative md:top-[-25px] inline-flex items-center gap-2 px-4 py-2 border border-white/20 rounded-full text-[var(--text-primary)] text-sm font-semibold hover:border-white/30 transition-all duration-300"
+                          style="background-color: var(--nav-bg); box-shadow: rgba(255, 255, 255, 0.1) 0px 0px 0px 0.1em inset;">
+                      <div class="w-2 h-2 bg-purple-600 rounded-full animate-pulse"></div>
+                      Open to Work
+                    </span>
+                  </div>
+                </div>
+
+                <span class="block text-[var(--text-muted)] mt-2 font-normal text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+                  {{aboutData?.job}}
+                </span>
+              </h2>
+            </div>
+
+            <p class="text-[var(--text-primary)] text-base sm:text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0">
+              {{aboutData?.descJob}}
+            </p>
+
+            <div class="flex flex-wrap gap-2 sm:gap-3 justify-center md:justify-start">
+              <span class="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-full text-[var(--text-primary)] text-xs sm:text-sm font-medium hover:border-[var(--text-hover)] hover:bg-white/30 transition-all duration-300 hover:scale-105 cursor-default">Next.js</span>
+              <span class="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-full text-[var(--text-primary)] text-xs sm:text-sm font-medium hover:border-[var(--text-hover)] hover:bg-white/30 transition-all duration-300 hover:scale-105 cursor-default">Angular.js</span>
+              <span class="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-full text-[var(--text-primary)] text-xs sm:text-sm font-medium hover:border-[var(--text-hover)] hover:bg-white/30 transition-all duration-300 hover:scale-105 cursor-default">Node.js</span>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start">
+              <a routerLink="/Projects" class="inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 cursor-pointer px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base bg-[var(--text-secondary)] text-[var(--bg-primary)] hover:bg-[var(--text-hover)]">
+                <span>View Projects</span>
+              </a>
+              <a routerLink="/Contact" class="inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 cursor-pointer px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base border-2 border-[var(--nav-border)] text-[var(--text-secondary)] hover:border-[var(--text-hover)] hover:bg-[var(--nav-bg)]">
+                <span>Hire Me</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

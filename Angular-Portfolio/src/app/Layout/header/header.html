@@ -1,0 +1,36 @@
+<header class="fixed top-0 w-full header z-50 backdrop-blur border-b border-white/5">
+  <nav class="max-w-[1440px] mx-auto flex justify-between items-center py-4 px-6 lg:px-12">
+    
+    <h1 class="font-inter text-2xl font-bold shrink-0" style="color:var(--text-secondary)">
+      Ahmed Salama
+    </h1>
+
+    <div class="flex-1 flex justify-center">
+        <app-navbar></app-navbar>
+    </div>
+
+    <ul class="hidden lg:flex gap-6 text-sm font-ibm-plex shrink-0" style="color:var(--text-secondary)">
+      <li><a href="#" class="hover:opacity-80 transition-opacity">GitHub ↗</a></li>
+      <li><a href="#" class="hover:opacity-80 transition-opacity">LinkedIn ↗</a></li>
+      <li><a href="#" class="hover:opacity-80 transition-opacity">Resume ↗</a></li>
+    </ul>
+
+    <button (click)="toggleMenu()" class="lg:hidden text-white text-2xl ml-4">
+      @if (!isMenuOpen()) {
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-7 h-7"><path d="M4 6h16M4 12h16M4 18h16" stroke-width="2" stroke-linecap="round"/></svg>
+      } @else {
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-7 h-7"><path d="M6 18L18 6M6 6l12 12" stroke-width="2" stroke-linecap="round"/></svg>
+      }
+    </button>
+  </nav>
+
+  @if (isMenuOpen()) {
+    <div class="lg:hidden bg-[#0a0a0a]/95 backdrop-blur-xl p-8 absolute w-full left-0 border-b border-white/10 shadow-2xl animate-fade-in">
+        <ul class="flex flex-col gap-6 text-center text-lg font-medium text-white/90">
+            <li><a routerLink="" (click)="toggleMenu()" routerLinkActive="text-blue-400">Home</a></li>
+            <li><a routerLink="/Projects" (click)="toggleMenu()" routerLinkActive="text-blue-400">Projects</a></li>
+            <li><a routerLink="/Contact" (click)="toggleMenu()" routerLinkActive="text-blue-400">Contact</a></li>
+        </ul>
+    </div>
+  }
+</header>

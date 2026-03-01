@@ -1,0 +1,32 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "tailwindcss";
+
+body{
+  background-color: var(--bg-primary);
+}
+
+:root {
+    --bg-primary: #111;
+    --bg-secondary: #1a1a1a;
+    --bg-tertiary: #2a2a2a;
+    --card-bg: #ffffff0d;
+    --text-primary: #e3e3e3;
+    --text-secondary: #fff;
+    --text-muted: #9ca3af;
+    --text-hover: #d1d5db;
+    --sec-bg: #00000080;
+    --nav-bg: #ffffff1a;
+    --nav-border: #fff3;
+    --nav-indicator: #fff3;
+    --mobile-bg: linear-gradient(to bottom, #000000e6, #374151cc);
+    --mobile-border: #4b5563;
+    --mobile-item-bg: linear-gradient(to right, #fff3, #d1d5d933);
+    --mobile-item-border: #9ca3af66;
+    --mobile-hover-border: #6b728080;
+    --mobile-gradient-line: linear-gradient(to right, #fff, #d1d5db);
+    --scrollbar-track: #1a1a1a;
+    --scrollbar-thumb: linear-gradient(180deg, #444 0%, #333 100%);
+    --scrollbar-thumb-hover: linear-gradient(180deg, #555 0%, #444 100%);
+    --scrollbar-border: #2a2a2a;
+}

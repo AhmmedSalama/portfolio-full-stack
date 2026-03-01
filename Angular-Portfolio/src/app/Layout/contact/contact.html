@@ -1,0 +1,96 @@
+<section id="contact" class="mt-10 mx-auto max-w-[1200px] px-4 lg:px-0">
+  <div class="border rounded-[.9rem] h-fit border-2 [border-color:var(--nav-border)] [background-color:var(--bg-tertiary)] p-2 shadow-2xl">
+    <div class="border [border-color:var(--nav-border)] rounded-[.9rem] [background-color:var(--sec-bg)]">
+      
+      <div class="mainSectionHeader p-4 flex items-center justify-between rounded-t-[.8rem] [background-color:var(--text-muted)]">
+        <div class="flex items-center justify-start">
+          <span class="bg-[#ff5f56] w-[10px] h-[10px] rounded-full mr-2 shadow-[0_0_5px_#ff5f56]"></span>
+          <span class="bg-[#ffbd2e] w-[10px] h-[10px] rounded-full mr-2 shadow-[0_0_5px_#ffbd2e]"></span>
+          <span class="bg-[#27c93f] w-[10px] h-[10px] rounded-full mr-2 shadow-[0_0_5px_#27c93f]"></span>
+        </div>
+        <h2 class="text-xl lg:text-2xl font-bold tracking-[.2rem] lg:tracking-[.3rem] text-white">CONTACT</h2>
+      </div>
+
+      @if (contactData(); as data) {
+      <div class="p-6 lg:p-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          
+          <div class="space-y-6">
+            <h3 class="text-2xl font-bold text-[var(--text-secondary)]">Contact Information</h3>
+            
+            <div class="space-y-4">
+              <div class="flex items-center gap-4 p-4 rounded-xl border border-[var(--nav-border)] [background-color:var(--bg-tertiary)] transition-all duration-300 hover:scale-[1.02] hover:border-[var(--text-secondary)] hover:shadow-lg group cursor-pointer">
+                <div class="p-3 rounded-lg [background-color:var(--nav-bg)] text-[var(--text-secondary)] group-hover:bg-[var(--text-secondary)] group-hover:text-[var(--sec-bg)] transition-all duration-300">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <div>
+                  <p class="text-[10px] text-[var(--text-muted)] uppercase">Email</p>
+                  <p class="text-[var(--text-primary)] text-sm md:text-base font-medium">{{data.email}}</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-4 p-4 rounded-xl border border-[var(--nav-border)] [background-color:var(--bg-tertiary)] transition-all duration-300 hover:scale-[1.02] hover:border-[#25D366] hover:shadow-lg group cursor-pointer">
+                <div class="p-3 rounded-lg [background-color:var(--nav-bg)] text-[var(--text-secondary)] group-hover:bg-[#25D366] group-hover:text-white transition-all duration-300">
+                  <i class="fab fa-whatsapp"></i>
+                </div>
+                <div>
+                  <p class="text-[10px] text-[var(--text-muted)] uppercase">WhatsApp</p>
+                  <p class="text-[var(--text-primary)] font-medium">{{data.whatsapp}}</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-4 p-4 rounded-xl border border-[var(--nav-border)] [background-color:var(--bg-tertiary)] transition-all duration-300 hover:scale-[1.02] hover:border-blue-400 hover:shadow-lg group cursor-pointer">
+                <div class="p-3 rounded-lg [background-color:var(--nav-bg)] text-[var(--text-secondary)] group-hover:bg-blue-400 group-hover:text-white transition-all duration-300">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div>
+                  <p class="text-[10px] text-[var(--text-muted)] uppercase">Location</p>
+                  <p class="text-[var(--text-primary)] font-medium">{{data.location}}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex gap-3 pt-4">
+              <a [href]="data.linkedin" target="_blank" class="p-3 rounded-xl bg-[var(--bg-tertiary)] border border-[var(--nav-border)] text-[var(--text-muted)] hover:text-white hover:bg-[#0077b5] hover:border-[#0077b5] hover:-translate-y-1.5 hover:shadow-[0_10px_20px_-10px_#0077b5] transition-all duration-300">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a [href]="data.github" target="_blank" class="p-3 rounded-xl bg-[var(--bg-tertiary)] border border-[var(--nav-border)] text-[var(--text-muted)] hover:text-white hover:bg-[#24292e] hover:border-[#24292e] hover:-translate-y-1.5 hover:shadow-[0_10px_20px_-10px_#24292e] transition-all duration-300">
+                <i class="fab fa-github"></i>
+              </a>
+              <a [href]="data.facebook" target="_blank" class="p-3 rounded-xl bg-[var(--bg-tertiary)] border border-[var(--nav-border)] text-[var(--text-muted)] hover:text-white hover:bg-[#1877f2] hover:border-[#1877f2] hover:-translate-y-1.5 hover:shadow-[0_10px_20px_-10px_#1877f2] transition-all duration-300">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="[background-color:var(--nav-bg)] p-6 rounded-2xl border border-[var(--nav-border)] shadow-inner transition-all duration-300">
+            <h3 class="text-xl font-bold text-[var(--text-secondary)] mb-6">Send Me a Message</h3>
+            
+            <form [formGroup]="msgForm" (ngSubmit)="onSend()" class="space-y-4">
+              <input formControlName="name" type="text" placeholder="Name *" class="w-full p-4 rounded-xl border border-[var(--nav-border)] [background-color:var(--bg-tertiary)] text-[var(--text-primary)] outline-none focus:border-[var(--text-secondary)] focus:ring-1 focus:ring-[var(--text-secondary)]/20 transition-all">
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input formControlName="phone" type="text" placeholder="Phone Number" class="w-full p-4 rounded-xl border border-[var(--nav-border)] [background-color:var(--bg-tertiary)] text-[var(--text-primary)] outline-none focus:border-[var(--text-secondary)] transition-all">
+                <input formControlName="email" type="email" placeholder="Email Address" class="w-full p-4 rounded-xl border border-[var(--nav-border)] [background-color:var(--bg-tertiary)] text-[var(--text-primary)] outline-none focus:border-[var(--text-secondary)] transition-all">
+              </div>
+              
+              <textarea formControlName="message" rows="4" placeholder="Message *" class="w-full p-4 rounded-xl border border-[var(--nav-border)] [background-color:var(--bg-tertiary)] text-[var(--text-primary)] outline-none focus:border-[var(--text-secondary)] transition-all resize-none"></textarea>
+              
+<button type="submit" [disabled]="msgForm.invalid" 
+        class="w-full py-4 rounded-xl font-black uppercase tracking-[0.3rem] text-[10px] transition-all duration-500
+               bg-white text-black 
+               hover:bg-black hover:text-[#27c93f] 
+               hover:border-[#27c93f] border-2 border-transparent
+               hover:shadow-[0_0_25px_rgba(39,201,63,0.3)]
+               active:scale-[0.95] disabled:opacity-20 disabled:cursor-not-allowed">
+  Send Message
+</button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</section>

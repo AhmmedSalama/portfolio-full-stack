@@ -1,0 +1,59 @@
+<div class="max-w-[1440px] mx-auto flex justify-between items-center py-4 px-6 lg:px-12 relative">
+  
+  <h1 class="font-inter text-2xl font-bold text-[var(--text-secondary)] z-[60]">
+    Ahmed Salama
+  </h1>
+
+  <ul #navContainer 
+      [class.hidden]="!isMenuOpen()" 
+      [class.flex]="isMenuOpen()"
+      class="lg:flex flex-col lg:flex-row gap-4 lg:gap-1 text-sm border rounded-2xl lg:rounded-full px-4 py-6 lg:p-2 absolute lg:relative top-full left-0 w-full lg:w-fit mt-4 lg:mt-0 z-[55] transition-all duration-300 backdrop-blur-2xl bg-black/95 lg:backdrop-blur-md lg:bg-[var(--nav-bg)]"
+      style="border-color:var(--nav-border)">
+    
+    <div class="indicator hidden lg:block absolute top-1/2 -translate-y-1/2 h-9 rounded-full transition-all duration-500 ease-in-out" 
+         [style.width.px]="indicatorWidth()"
+         [style.left.px]="indicatorLeft()"
+         style="background-color: rgba(255, 255, 255, 0.12); 
+                box-shadow: 0 0 35px 10px rgba(255, 255, 255, 0.2), 
+                            inset 0 0 15px rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.2);">
+         <div class="absolute -top-[1px] left-1/2 -translate-x-1/2 w-10 h-[1.5px] bg-white rounded-full shadow-[0_0_20px_4px_white]"></div>
+    </div>
+
+    <li class="relative z-10 text-center" #home>
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+         (isActiveChange)="$event && updateIndicator(home)" (click)="isMenuOpen.set(false)"
+         class="px-6 py-3 lg:py-2 block whitespace-nowrap transition-colors duration-300 text-[var(--text-secondary)]">Home</a>
+    </li>
+
+    <li class="relative z-10 text-center" #projects>
+      <a routerLink="/Projects" routerLinkActive="active"
+         (isActiveChange)="$event && updateIndicator(projects)" (click)="isMenuOpen.set(false)"
+         class="px-6 py-3 lg:py-2 block whitespace-nowrap transition-colors duration-300 text-[var(--text-secondary)]">Projects</a>
+    </li>
+
+    <li class="relative z-10 text-center" #contact>
+      <a routerLink="/Contact" routerLinkActive="active"
+         (isActiveChange)="$event && updateIndicator(contact)" (click)="isMenuOpen.set(false)"
+         class="px-6 py-3 lg:py-2 block whitespace-nowrap transition-colors duration-300 text-[var(--text-secondary)]">Contact</a>
+    </li>
+  </ul>
+
+  <div class="flex items-center gap-6 z-[60]">
+    <div class="hidden lg:flex gap-6 text-sm text-[var(--text-secondary)]">
+      <a href="#" class="hover:text-gray-300 transition-colors">GitHub ↗</a>
+      <a href="#" class="hover:text-gray-300 transition-colors">LinkedIn ↗</a>
+      <a href="#" class="hover:text-gray-300 transition-colors">Resume ↗</a>
+    </div>
+
+    <button (click)="toggleMenu()" class="lg:hidden text-white p-2">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-7 h-7">
+        @if (!isMenuOpen()) {
+          <path d="M4 6h16M4 12h16M4 18h16" stroke-width="2" stroke-linecap="round"/>
+        } @else {
+          <path d="M6 18L18 6M6 6l12 12" stroke-width="2" stroke-linecap="round"/>
+        }
+      </svg>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+/* تنسيق SweetAlert مستوحى من ملف الـ CSS الخاص بك */
+.portfolio-alert-popup {
+  border: 1px solid var(--nav-border) !important;
+  background-color: rgba(26, 26, 26, 0.95) !important; /* خليط من bg-secondary مع شفافية */
+  backdrop-filter: blur(10px); /* تأثير الزجاج */
+  border-radius: 1rem !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* شريط الوقت بنفس روح الـ Scrollbar thumb عندك */
+.portfolio-alert-progress {
+  background: var(--scrollbar-thumb) !important;
+  height: 2px !important;
+}
+
+/* تعديل الخطوط لتتناسب مع التنسيق العام */
+.swal2-title {
+  font-family: 'Inter', sans-serif; /* أو الخط المستخدم عندك */
+  font-weight: 900 !important;
+  letter-spacing: 0.2rem;
+  font-size: 1.1rem !important;
+}
+
+.swal2-html-container {
+  color: var(--text-muted) !important;
+  font-size: 0.85rem !important;
+}
